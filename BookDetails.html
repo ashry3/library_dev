@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .book-container {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+        .book-image {
+            width: 300px;
+            height: auto;
+        }
+        .book-description {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .book-container.active .book-description {
+            display: block;
+        }
+        .book-options {
+            margin-top: 20px;
+        }
+        .option-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .option-button:hover {
+            background-color: #45a049;
+        }
+        .star-rating {
+            display: inline-block;
+            font-size: 2em;
+            color: #fff;
+            margin-top: 10px;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating input:hover ~ label,
+        .star-rating label:hover ~ label {
+            color: #ffcc00;
+        }
+        .celebration-message {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.5em;
+        }
+        .celebration-message.happy {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .celebration-message.sad {
+            background-color: #f44336;
+            color: #fff;
+        }
+        .celebration-message.neutral {
+            background-color: #ff9800;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Details</h1>
+    <div class="book-container" onclick="toggleDescription()">
+        <img src="Books\Tales_of_Horror_and_the_Supernatural\tales-horror-supernatural-winton.jpg" alt="Book Cover" class="book-image">
+        <div class="book-description">
+            <h2>Book Title: Tales of Horror and the Supernatural</h2>
+            <p><strong>Author:</strong> Graeme Winton </p>
+            <p><strong>Type:</strong> Herror</p>
+            <p><strong>Price:</strong> $15.00</p>
+            <p>A group of short stories of which I have written over a number of years, and have just fine-tuned.
+
+There are tales of revenge, haunting and possession to enjoy, but don't have sleepless nights!
+
+Excerpt from UNWORTHY OF LIFE:
+
+I stared at the white-washed walls. I stared at the window with iron bars. I stared at the dirty blue and grey striped mattress, which was my bed. Grey stuffing protruded from a hole in the corner and was trying to escape the stitched confines.
+
+The overall I wore was baggy and hadn’t been washed for weeks. My hair, shaved off my scalp, was bristly to the touch. Being physically handicapped they confined me to a wheelchair.
+
+The sound of marching boots outside - the sound of shouts and screams inside the building. Einsicht Mental Institution was an old prison with cold flagstone floors and had been my home for five years since I was given up by my mother.
+
+She came to see me at the start, but after a while she came no more. Dieter, the nurse who cared for me, told me she had moved away because she wanted to give our house to good people.
+
+When I was alone, I took out the small metal cross with the funny little man on it she had given me and I prayed for her the way she had shown me. I also prayed for the other people like me trapped in their rooms..</p>
+        </div>
+    </div>
+    <div class="book-options">
+        <button class="option-button" onclick="downloadBook()">Read&Download Book</button>
+        <button class="option-button" onclick="showDescription()">Show Description</button>
+    </div>
+    <div class="star-rating">
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+    <div id="celebration-message" class="celebration-message">
+        <!-- Celebration message will be updated by JavaScript -->
+    </div>
+    <script>
+        function toggleDescription() {
+            const container = document.querySelector('.book-container');
+            container.classList.toggle('active');
+        }
+        function downloadBook() {
+ window.location.href = 'file:Books/Tales_of_Horror_and_the_Supernatural/TalesHorror-obooko-hor0077.pdf';
+        }
+        function showDescription() {
+            const description = document.querySelector('.book-description');
+            description.style.display = description.style.display === 'block' ? 'none' : 'block';
+        }
+        // Function to show the celebration message based on the rating
+        const stars = document.querySelectorAll('.star-rating input');
+        const message = document.getElementById('celebration-message');
+        stars.forEach(star => {
+            star.addEventListener('change', function() {
+                const ratingValue = parseInt(this.value);
+                message.style.display = 'block';
+                switch (ratingValue) {
+                    case 5:
+                        message.textContent = 'Congratulations! You rated this book 5 stars! 🎉';
+                        message.className = 'celebration-message happy';
+                        break;
+                    case 4:
+                        message.textContent = 'Great choice! You rated this book 4 stars! ✨';
+                        message.className = 'celebration-message happy';
+                        break;
+                    case 3:
+                        message.textContent = 'Good rating! You rated this book 3 stars. 👍';
+                        message.className = 'celebration-message neutral';
+                        break;
+                    case 2:
+                        message.textContent = 'Not bad! You rated this book 2 stars. 🤔';
+                        message.className = 'celebration-message neutral';
+                        break;
+                    case 1:
+                        message.textContent = 'We’re sorry to hear that. You rated this book 1 star. 😢';
+                        message.className = 'celebration-message sad';
+                        break;
+                    default:
+                        message.style.display = 'none';
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
